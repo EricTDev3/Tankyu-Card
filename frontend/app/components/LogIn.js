@@ -76,6 +76,16 @@ export default function LogIn() {
             </button>
           </div>
         </form>
+
+        <p className="mt-10 text-center text-sm/6 text-gray-500">
+          Not a member?{" "}
+          <a
+            href="/signUp"
+            className="font-semibold text-indigo-400 hover:text-indigo-300"
+          >
+            Register
+          </a>
+        </p>
       </div>
     </div>
   );
