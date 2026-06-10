@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 
-export default function LogIn() {
+export default function Login() {
   return (
     <div className="flex min-h-screen items-center justify-center px-6 py-12 lg:px-8">
       <div className="w-full max-w-sm">
