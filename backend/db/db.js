@@ -3,7 +3,7 @@ import { Pool } from "pg";
 
 const { PGDATABASE, PGUSER, PGHOST, PGPASSWORD } = process.env;
 
-export const pool = new Pool({
+const pool = new Pool({
   host: PGHOST,
   database: PGDATABASE,
   user: PGUSER,
@@ -23,3 +23,5 @@ const connect = async () => {
 };
 
 connect();
+
+export default pool;
