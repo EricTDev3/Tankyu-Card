@@ -21,8 +21,8 @@ const protect = async (req, res, next) => {
 
   try {
     const payload = jwt.decode(token, jwtSecret);
-    const data = "SELECT * FROM users WHERE id = $1";
-    const result = await pool.query(data, [payload.id]);
+    const data = "SELECT * FROM users WHERE email = $1";
+    const result = await pool.query(data, [payload.email]);
     const user = result.rows[0];
     req.user = user;
     next();
