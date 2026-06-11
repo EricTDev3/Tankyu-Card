@@ -1,7 +1,31 @@
 "use client";
 import Image from "next/image";
+import { useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const router = useRouter();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const userLogin = await axios.post("http://localhost:8000/auth/login", {
+        email,
+        password,
+      });
+
+      localStorage.setItem("token", userLogin.data.token);
+      router.push("/dashboard");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="flex min-h-screen items-center justify-center px-6 py-12 lg:px-8">
       <div className="w-full max-w-sm">
@@ -18,7 +42,12 @@ export default function Login() {
           </h2>
         </div>
 
-        <form action="#" method="POST" className="mt-10 space-y-6">
+        <form
+          onSubmit={handleSubmit}
+          action="#"
+          method="POST"
+          className="mt-10 space-y-6"
+        >
           <div>
             <label
               htmlFor="email"
@@ -31,6 +60,8 @@ export default function Login() {
                 id="email"
                 name="email"
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
                 autoComplete="email"
                 className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
@@ -60,6 +91,8 @@ export default function Login() {
                 id="password"
                 name="password"
                 type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
                 autoComplete="current-password"
                 className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
