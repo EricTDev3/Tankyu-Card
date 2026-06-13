@@ -19,3 +19,17 @@ export const addCard = async (req, res) => {
     return res.status(500).json({ error: "Failed to add new card data" });
   }
 };
+
+export const getCards = async (req, res) => {
+  const userId = req.user.id;
+
+  const cardList = "SELECT * FROM shopping_list WHERE user_id = $1";
+
+  try {
+    const result = await pool.query(cardList, [userId]);
+    console.log(result);
+    return res.status(200).json({ success: true, shopping_list: result.rows });
+  } catch (error) {
+    return res.status(500).json({ error: "Failed to get card list" });
+  }
+};

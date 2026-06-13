@@ -1,13 +1,40 @@
-import { useState } from "react";
+"use client";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-export default function ShoppingForm() {
+export default function ShoppingForm({ token, getCardsList }) {
   const [name, setName] = useState("");
   const [set, setSet] = useState("");
-  const [marketPrice, setMarketPrice] = useState();
+  const [marketPrice, setMarketPrice] = useState("");
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    if (!token) return;
+    getCardsList();
+  }, [token]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Hello");
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/shoppingList/addCard",
+        { name, set, marketPrice },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        },
+      );
+
+      setName("");
+      setSet("");
+      setMarketPrice("");
+
+      getCardsList();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
