@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import CurrencyConverter from "./CurrencyConverter";
 import axios from "axios";
 
 export default function ShoppingForm({ token, getCardsList }) {
@@ -38,7 +39,7 @@ export default function ShoppingForm({ token, getCardsList }) {
   };
 
   return (
-    <div className="flex items-start px-12 py-12 ">
+    <div className="flex items-start justify-center px-12 py-12 ">
       <form
         onSubmit={handleSubmit}
         action="#"
@@ -97,6 +98,7 @@ export default function ShoppingForm({ token, getCardsList }) {
           </button>
         </div>
       </form>
+      <CurrencyConverter />
     </div>
   );
 }
