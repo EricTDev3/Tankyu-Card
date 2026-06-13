@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth.js";
+import shoppingRoutes from "./routes/shoppingList.js";
 
 dotenv.config();
 
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/auth", authRoutes);
+app.use("/shoppingList", shoppingRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

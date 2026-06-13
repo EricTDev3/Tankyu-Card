@@ -8,6 +8,7 @@ const jwtSecret = process.env.JWT_SECRET;
 
 const protect = async (req, res, next) => {
   const authHeader = req.headers.authorization;
+  console.log("authHeader:", authHeader);
 
   if (!authHeader) {
     return res.status(401).json({ message: "header is undefined" });
@@ -22,12 +23,11 @@ const protect = async (req, res, next) => {
   try {
     const payload = jwt.decode(token, jwtSecret);
     const data = "SELECT * FROM users WHERE email = $1";
-    const result = await pool.query(data, [payload.email]);
+    const result = await pool.query(data, [payload.sub]);
     const user = result.rows[0];
     req.user = user;
     next();
   } catch (err) {
-    console.log("jwt error:", err);
     return res.status(401).json({ message: "Invalid token" });
   }
 };
