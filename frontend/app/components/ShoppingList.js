@@ -14,7 +14,7 @@ export default function Dashboard() {
   const getCardsList = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8000/shoppingList/getCards",
+        `${process.env.NEXT_PUBLIC_API_URL}/shoppingList/getCards`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -14,10 +14,13 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      const userLogin = await axios.post("http://localhost:8000/auth/login", {
-        email,
-        password,
-      });
+      const userLogin = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
+        {
+          email,
+          password,
+        },
+      );
 
       localStorage.setItem("token", userLogin.data.token);
       router.push("/shoppingList");
