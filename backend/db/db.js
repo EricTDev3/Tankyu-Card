@@ -1,4 +1,5 @@
 import "dotenv/config";
+console.log(process.env.DATABASE_URL);
 import { Pool } from "pg";
 
 const { PGDATABASE, PGUSER, PGHOST, PGPASSWORD } = process.env;
@@ -18,7 +19,7 @@ const connect = async () => {
     console.log("DB connected");
     client.release();
   } catch (err) {
-    console.lerror("DB connection failed:", err);
+    console.error("DB connection failed:", err);
   }
 };
 
