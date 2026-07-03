@@ -1,9 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
 import ShoppingForm from "./ShoppingForm";
+import Sidebar from "./Sidebar";
 import axios from "axios";
 
-export default function Dashboard() {
+export default function ShoppingList() {
   const [token, setToken] = useState(null);
   const [cardList, setCardList] = useState([]);
 
@@ -29,8 +30,9 @@ export default function Dashboard() {
   };
 
   return (
-    <>
-      <div className="flex flex-col items-center bg-orange-400 h-screen">
+    <div className="flex h-screen">
+      <Sidebar />
+      <div className="flex flex-col items-center bg-orange-400 flex-1 overflow-y-auto">
         <ShoppingForm token={token} getCardsList={getCardsList} />
         <table className="table mx-auto w-auto">
           <thead>
@@ -51,6 +53,6 @@ export default function Dashboard() {
           </tbody>
         </table>
       </div>
-    </>
+    </div>
   );
 }

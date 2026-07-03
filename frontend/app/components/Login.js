@@ -23,6 +23,7 @@ export default function Login() {
       );
 
       localStorage.setItem("token", userLogin.data.token);
+      //router.push("/shoppingList");
       router.push("/shoppingList");
     } catch (error) {
       console.error(error);
