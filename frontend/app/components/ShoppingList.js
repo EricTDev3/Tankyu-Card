@@ -32,9 +32,9 @@ export default function ShoppingList() {
   return (
     <div className="flex h-screen">
       <Sidebar />
-      <div className="flex flex-col items-center bg-orange-400 flex-1 overflow-y-auto">
+      <div className="flex flex-col items-center flex-1 min-h-screen overflow-y-auto">
         <ShoppingForm token={token} getCardsList={getCardsList} />
-        <table className="table mx-auto w-auto">
+        <table className="table mx-auto w-auto bg-gray-200">
           <thead>
             <tr className="text-blue-600">
               <th className="px-8">Name</th>
