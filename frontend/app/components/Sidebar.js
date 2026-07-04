@@ -59,7 +59,10 @@ export default function Sidebar() {
           </ListItemPrefix>
           Shopping List
         </ListItem>
-        <ListItem className="mb-2 cursor-pointer hover:font-bold">
+        <ListItem
+          className="mb-2 cursor-pointer hover:font-bold"
+          onClick={() => router.push("/currencyConverter")}
+        >
           <ListItemPrefix>
             <CurrencyYenIcon className="h-5 w-5" />
           </ListItemPrefix>
