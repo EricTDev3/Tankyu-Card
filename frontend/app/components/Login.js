@@ -20,10 +20,8 @@ export default function Login() {
           email,
           password,
         },
+        { withCredentials: true },
       );
-
-      localStorage.setItem("token", userLogin.data.token);
-      //router.push("/shoppingList");
       router.push("/shoppingList");
     } catch (error) {
       console.error(error);
