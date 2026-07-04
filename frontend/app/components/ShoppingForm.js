@@ -3,15 +3,14 @@ import { useState, useEffect } from "react";
 import CurrencyConverter from "./CurrencyConverter";
 import axios from "axios";
 
-export default function ShoppingForm({ token, getCardsList }) {
+export default function ShoppingForm({ getCardsList }) {
   const [name, setName] = useState("");
   const [set, setSet] = useState("");
   const [marketPrice, setMarketPrice] = useState("");
 
   useEffect(() => {
-    if (!token) return;
     getCardsList();
-  }, [token]);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,12 +19,7 @@ export default function ShoppingForm({ token, getCardsList }) {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/shoppingList/addCard`,
         { name, set, marketPrice },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        },
+        { withCredentials: true },
       );
 
       setName("");
