@@ -7,14 +7,7 @@ dotenv.config();
 const jwtSecret = process.env.JWT_SECRET;
 
 const protect = async (req, res, next) => {
-  const authHeader = req.headers.authorization;
-  console.log("authHeader:", authHeader);
-
-  if (!authHeader) {
-    return res.status(401).json({ message: "header is undefined" });
-  }
-
-  const token = authHeader.split(" ")[1];
+  const token = req.cookies.token;
 
   if (!token) {
     return res.status(401).json({ message: "No token provided" });
