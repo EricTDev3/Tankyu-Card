@@ -1,27 +1,17 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ShoppingForm from "./ShoppingForm";
 import Sidebar from "./Sidebar";
 import axios from "axios";
 
 export default function ShoppingList() {
-  const [token, setToken] = useState(null);
   const [cardList, setCardList] = useState([]);
-
-  useEffect(() => {
-    setToken(localStorage.getItem("token"));
-  }, []);
 
   const getCardsList = async () => {
     try {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_URL}/shoppingList/getCards`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        },
+        { withCredentials: true },
       );
       setCardList(response.data.shopping_list);
     } catch (error) {
