@@ -14,8 +14,21 @@ import {
   BuildingStorefrontIcon,
   PowerIcon,
 } from "@heroicons/react/24/solid";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 
 export default function Sidebar() {
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await axios.post(
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/logout`,
+      {},
+      { withCredentials: true },
+    );
+    router.push("/");
+  };
+
   return (
     <Card className="h-screen w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
       <div className="mb-2 p-4">
@@ -48,7 +61,7 @@ export default function Sidebar() {
           </ListItemPrefix>
           Profile
         </ListItem>
-        <ListItem className="mb-2">
+        <ListItem className="mb-2" onClick={handleLogout}>
           <ListItemPrefix>
             <PowerIcon className="h-5 w-5" />
           </ListItemPrefix>
