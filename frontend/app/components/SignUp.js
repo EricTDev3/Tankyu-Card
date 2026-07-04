@@ -129,6 +129,15 @@ export default function SignUp() {
             >
               Register
             </button>
+            <p className="mt-10 text-center text-sm/6 text-gray-500">
+              Already a member?{" "}
+              <a
+                href="/login"
+                className="font-semibold text-indigo-400 hover:text-indigo-300"
+              >
+                Log in
+              </a>
+            </p>
           </div>
         </form>
       </div>
