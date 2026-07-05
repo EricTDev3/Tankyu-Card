@@ -38,7 +38,10 @@ export default function Sidebar() {
         </Typography>
       </div>
       <List>
-        <ListItem className="mb-2 cursor-pointer hover:font-bold">
+        <ListItem
+          className="mb-2 cursor-pointer hover:font-bold"
+          onClick={() => router.push("/allShops")}
+        >
           <ListItemPrefix>
             <BuildingOffice2Icon className="h-5 w-5" />
           </ListItemPrefix>
