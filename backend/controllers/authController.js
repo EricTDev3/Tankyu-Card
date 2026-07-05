@@ -1,9 +1,7 @@
 import pool from "../db/db.js";
 import bcrypt from "bcrypt";
-import dotenv from "dotenv";
+import dotenv from "dotenv/config";
 import jwt from "jwt-simple";
-
-dotenv.config();
 
 const jwtSecret = process.env.JWT_SECRET;
 
@@ -50,7 +48,7 @@ export const login = async (req, res) => {
         maxAge: 14 * 24 * 60 * 60 * 1000,
       })
       .status(200)
-      .json({ message: "Login successful" });
+      .json({ message: "Login successful", token });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Something went wrong" });
