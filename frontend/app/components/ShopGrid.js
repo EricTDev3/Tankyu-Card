@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import ShopModal from "./ShopModal";
 
 export default function ShopGrid() {
   const [shops, setShops] = useState([]);
   const [selectedCity, setSelectedCity] = useState("");
+  const [selectedShop, setSelectedShop] = useState(null);
 
   const cities = ["Tokyo", "Osaka"];
+
   let selectedCityShops = selectedCity
     ? shops.filter((shop) => shop.city === selectedCity)
     : shops;
@@ -23,12 +26,20 @@ export default function ShopGrid() {
 
   const handleCity = (city) => {
     setSelectedCity(city);
-    console.log(city);
   };
 
+  const handleSelectedShop = (shop) => {
+    setSelectedShop(shop);
+  };
+
+  const handleClose = () => {
+    setSelectedShop(null);
+  };
   return (
     <>
-      <div className="flex flex-row justify-center gap-2">
+      <div
+        className={`flex flex-row justify-center gap-2 ${selectedShop ? "blur-sm" : ""}`}
+      >
         {cities.map((city) => (
           <button
             key={city}
@@ -40,9 +51,14 @@ export default function ShopGrid() {
           </button>
         ))}
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+      {selectedShop !== null ? (
+        <ShopModal shop={selectedShop} onClose={handleClose} />
+      ) : null}
+      <div
+        className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6 ${selectedShop ? "blur-sm" : ""}`}
+      >
         {selectedCityShops.map((shop) => (
-          <div key={shop.id}>
+          <div key={shop.id} onClick={() => handleSelectedShop(shop)}>
             <a
               href="#"
               className="block border-2 border-black bg-white p-4 text-black shadow-[4px_4px_0_0] shadow-black hover:bg-yellow-200 focus:ring-2 focus:ring-yellow-300 focus:outline-0 sm:p-6"
