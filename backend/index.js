@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 8000;
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "tankyu-card.vercel.app"],
+    origin: ["http://localhost:3000", "https://tankyu-card.vercel.app"],
     credentials: true,
   }),
 );
