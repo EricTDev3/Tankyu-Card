@@ -31,7 +31,7 @@ export default function Sidebar() {
   };
 
   return (
-    <Card className="fixed h-screen w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 bg-yellow-300">
+    <Card className="sticky top-0 h-screen w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 bg-yellow-300">
       <div className="mb-2 p-4">
         <Typography variant="h5" color="blue-gray" className="text-purple-600">
           TANKYU CARD
