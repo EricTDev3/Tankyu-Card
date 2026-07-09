@@ -1,4 +1,18 @@
+import axios from "axios";
+
 export default function ShopModal({ shop, onClose }) {
+  const handleAddShop = async (id) => {
+    try {
+      const reponse = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/shops/savedShops`,
+        { shopId: id },
+        { withCredentials: true },
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <dialog
@@ -60,7 +74,10 @@ export default function ShopModal({ shop, onClose }) {
             {shop.description}
           </p>
         </div>
-        <button className="flex justify-self-end rounded-full w-8 h-8 items-center cursor-pointer justify-center border border-indigo-600 bg-indigo-600 text-white shadow-sm transition-colors hover:bg-indigo-400 focus-visible:ring-4 focus-visible:ring-indigo-100 focus-visible:outline-none">
+        <button
+          className="flex justify-self-end rounded-full w-8 h-8 items-center cursor-pointer justify-center border border-indigo-600 bg-indigo-600 text-white shadow-sm transition-colors hover:bg-indigo-400 focus-visible:ring-4 focus-visible:ring-indigo-100 focus-visible:outline-none"
+          onClick={() => handleAddShop(shop.id)}
+        >
           +
         </button>
       </dialog>

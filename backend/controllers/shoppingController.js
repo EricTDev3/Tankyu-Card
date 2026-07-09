@@ -13,7 +13,7 @@ export const addCard = async (req, res) => {
   try {
     const result = await pool.query(cardData, [name, set, marketPrice, userId]);
     return res
-      .status(200)
+      .status(201)
       .json({ success: true, shopping_list: result.rows[0] });
   } catch (error) {
     return res.status(500).json({ error: "Failed to add new card data" });
