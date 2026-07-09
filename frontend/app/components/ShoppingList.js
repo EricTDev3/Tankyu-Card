@@ -37,7 +37,7 @@ export default function ShoppingList() {
               <tr key={card.id}>
                 <td className="px-8">{card.name}</td>
                 <td className="px-8">{card.set}</td>
-                <td className="px-8">$ {card.market_price}</td>
+                <td className="px-8">${card.market_price}</td>
               </tr>
             ))}
           </tbody>
