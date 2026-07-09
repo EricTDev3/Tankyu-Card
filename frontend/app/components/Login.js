@@ -39,6 +39,9 @@ export default function Login() {
             height={180}
             className="mx-auto"
           />
+          <h1 className="mt-10 text-center text-2xl font-bold tracking-tight text-purple-900">
+            Tankyu Card カード クエスト
+          </h1>
           <h2 className="mt-10 text-center text-2xl font-bold tracking-tight text-gray-900">
             Log in to your account
           </h2>
