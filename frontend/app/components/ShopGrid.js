@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ShopModal from "./ShopModal";
+import ShopCard from "./ShopCard";
 
 export default function ShopGrid() {
   const [shops, setShops] = useState([]);
@@ -59,7 +60,8 @@ export default function ShopGrid() {
       >
         {selectedCityShops.map((shop) => (
           <div key={shop.id} onClick={() => handleSelectedShop(shop)}>
-            <a
+            <ShopCard shop={shop} />
+            {/* <a
               href="#"
               className="block border-2 border-black bg-white p-4 text-black shadow-[4px_4px_0_0] shadow-black hover:bg-yellow-200 focus:ring-2 focus:ring-yellow-300 focus:outline-0 sm:p-6"
             >
@@ -76,7 +78,7 @@ export default function ShopGrid() {
                     : `${set}, `,
                 )}
               </p>
-            </a>
+            </a> */}
           </div>
         ))}
       </div>
