@@ -32,3 +32,19 @@ export const getCards = async (req, res) => {
     return res.status(500).json({ error: "Failed to get card list" });
   }
 };
+
+export const deleteCard = async (req, res) => {
+  const { cardId } = req.body;
+  const userId = req.user.id;
+  console.log(cardId);
+
+  const selectedCard =
+    "DELETE FROM shopping_list WHERE shopping_list.id = $1 and shopping_list.user_id = $2";
+
+  try {
+    const result = await pool.query(selectedCard, [cardId, userId]);
+    return res.status(200).json({ success: true });
+  } catch (error) {
+    return res.status(500).json({ error: "Failed to delete card" });
+  }
+};

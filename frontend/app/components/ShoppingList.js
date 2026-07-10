@@ -21,6 +21,19 @@ export default function ShoppingList() {
     }
   };
 
+  const handleDeleteCard = async (cardId) => {
+    try {
+      const response = await axios.delete(
+        `${process.env.NEXT_PUBLIC_API_URL}/shoppingList/deleteCard`,
+        { withCredentials: true, data: { cardId } },
+      );
+      const updatedCardList = cardList.filter((card) => card.id !== cardId);
+      setCardList(updatedCardList);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="flex h-screen">
       <Sidebar />
@@ -45,7 +58,7 @@ export default function ShoppingList() {
                   <IconButton>
                     <PencilSquareIcon className="h-5 w-5 cursor-pointer bg-blue-500 hover:bg-sky-800 active:border-b-0 active:translate-y-[4px] active:shadow-none transition-all" />
                   </IconButton>
-                  <IconButton>
+                  <IconButton onClick={() => handleDeleteCard(card.id)}>
                     <TrashIcon className="h-5 w-5 bg-red-500 hover:bg-red-800 cursor-pointer active:border-b-0 active:translate-y-[4px] active:shadow-none transition-all" />
                   </IconButton>
                 </td>
