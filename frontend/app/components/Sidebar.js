@@ -47,11 +47,14 @@ export default function Sidebar() {
           </ListItemPrefix>
           All Shops
         </ListItem>
-        <ListItem className="mb-2 cursor-pointer hover:font-bold">
+        <ListItem
+          className="mb-2 cursor-pointer hover:font-bold"
+          onClick={() => router.push("/tcgWaypoints")}
+        >
           <ListItemPrefix>
             <BuildingStorefrontIcon className="h-5 w-5" />
           </ListItemPrefix>
-          Must Visit
+          TCG Waypoints
         </ListItem>
         <ListItem
           className="mb-2 cursor-pointer hover:font-bold"

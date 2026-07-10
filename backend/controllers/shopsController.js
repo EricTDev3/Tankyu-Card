@@ -30,3 +30,18 @@ export const savedShops = async (req, res) => {
     return res.status(500).json({ error: "Failed to get card shop data" });
   }
 };
+
+export const getSavedShops = async (req, res) => {
+  const userId = req.user.id;
+  const shopData =
+    "SELECT * FROM tcg_shops join saved_shops on tcg_shops.id = saved_shops.shop_id WHERE user_id = $1";
+
+  try {
+    const result = await pool.query(shopData, [userId]);
+    return res.status(200).json({ success: true, shopData: result.rows });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ error: "Failed to get saved card shop data" });
+  }
+};
