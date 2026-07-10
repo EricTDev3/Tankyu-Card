@@ -34,7 +34,7 @@ export const savedShops = async (req, res) => {
 export const getSavedShops = async (req, res) => {
   const userId = req.user.id;
   const shopData =
-    "SELECT * FROM tcg_shops join saved_shops on tcg_shops.id = saved_shops.shop_id WHERE user_id = $1";
+    "SELECT tcg_shops.*, tcg_shops.id as shop_id FROM tcg_shops JOIN saved_shops ON tcg_shops.id = saved_shops.shop_id WHERE user_id = $1";
 
   try {
     const result = await pool.query(shopData, [userId]);
@@ -43,5 +43,20 @@ export const getSavedShops = async (req, res) => {
     return res
       .status(500)
       .json({ error: "Failed to get saved card shop data" });
+  }
+};
+
+export const deleteSavedShop = async (req, res) => {
+  const userId = req.user.id;
+  const { shopId } = req.body;
+
+  const removeShop =
+    "DELETE FROM saved_shops WHERE user_id = $1 AND shop_id = $2";
+
+  try {
+    const result = await pool.query(removeShop, [userId, shopId]);
+    return res.status(200).json({ success: true });
+  } catch (error) {
+    return res.status(500).json({ error: "Failed to delete shop" });
   }
 };

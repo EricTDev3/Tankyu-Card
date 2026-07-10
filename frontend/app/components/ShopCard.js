@@ -1,4 +1,4 @@
-export default function ShopCard({ shop }) {
+export default function ShopCard({ shop, action }) {
   return (
     <a
       href="#"
@@ -15,6 +15,7 @@ export default function ShopCard({ shop }) {
           index === shop.card_set_sold.length - 1 ? `${set}` : `${set}, `,
         )}
       </p>
+      {action}
     </a>
   );
 }

@@ -17,6 +17,15 @@ export default function MustVisitShops() {
     fetchSavedShops();
   }, []);
 
+  const handleRemove = async (shopId) => {
+    const response = await axios.delete(
+      `${process.env.NEXT_PUBLIC_API_URL}/shops/deleteSavedShop`,
+      { withCredentials: true, data: { shopId } },
+    );
+    const filteredShops = savedShops.filter((shop) => shop.shop_id !== shopId);
+    setSavedShops(filteredShops);
+  };
+
   return (
     <>
       <div className="flex bg-blue-500">
@@ -30,7 +39,17 @@ export default function MustVisitShops() {
           >
             {savedShops.map((shop) => (
               <div key={shop.id}>
-                <ShopCard shop={shop} />
+                <ShopCard
+                  shop={shop}
+                  action={
+                    <button
+                      className="flex justify-self-end rounded-full w-8 h-8 items-center cursor-pointer justify-center border border-indigo-600 bg-indigo-600 text-white shadow-sm transition-colors hover:bg-indigo-400 focus-visible:ring-4 focus-visible:ring-indigo-100 focus-visible:outline-none"
+                      onClick={() => handleRemove(shop.id)}
+                    >
+                      -
+                    </button>
+                  }
+                />
               </div>
             ))}
           </div>
