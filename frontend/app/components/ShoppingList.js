@@ -1,6 +1,7 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ShoppingForm from "./ShoppingForm";
+import CardEditingModal from "./CardEditingModal";
 import Sidebar from "./Sidebar";
 import axios from "axios";
 import { IconButton } from "@material-tailwind/react";
@@ -8,6 +9,23 @@ import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/solid";
 
 export default function ShoppingList() {
   const [cardList, setCardList] = useState([]);
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [editClicked, setEditClicked] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    cardSet: "",
+    marketPrice: "",
+  });
+
+  const handleEditCard = (card) => {
+    setEditClicked(true);
+    setSelectedCard(card);
+    setFormData({
+      name: card.name,
+      cardSet: card.set,
+      marketPrice: card.market_price,
+    });
+  };
 
   const getCardsList = async () => {
     try {
@@ -38,6 +56,13 @@ export default function ShoppingList() {
     <div className="flex h-screen">
       <Sidebar />
       <div className="flex flex-col items-center flex-1 min-h-screen overflow-y-auto">
+        {editClicked && (
+          <CardEditingModal
+            formData={formData}
+            setFormData={setFormData}
+            setEditClicked={setEditClicked}
+          />
+        )}
         <ShoppingForm getCardsList={getCardsList} />
         <table className="table mx-auto w-auto bg-gray-200">
           <thead>
@@ -55,7 +80,7 @@ export default function ShoppingList() {
                 <td className="px-8">{card.set}</td>
                 <td className="px-8">${card.market_price}</td>
                 <td className="px-8 flex gap-2">
-                  <IconButton>
+                  <IconButton onClick={() => handleEditCard(card)}>
                     <PencilSquareIcon className="h-5 w-5 cursor-pointer bg-blue-500 hover:bg-sky-800 active:border-b-0 active:translate-y-[4px] active:shadow-none transition-all" />
                   </IconButton>
                   <IconButton onClick={() => handleDeleteCard(card.id)}>
