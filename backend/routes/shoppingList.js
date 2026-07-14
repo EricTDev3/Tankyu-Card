@@ -3,6 +3,7 @@ import {
   addCard,
   getCards,
   deleteCard,
+  editCard,
 } from "../controllers/shoppingController.js";
 import protect from "../middleware/protect.js";
 
@@ -11,5 +12,6 @@ const router = express.Router();
 router.post("/addCard", protect, addCard);
 router.get("/getCards", protect, getCards);
 router.delete("/deleteCard", protect, deleteCard);
+router.patch("/editCard", protect, editCard);
 
 export default router;

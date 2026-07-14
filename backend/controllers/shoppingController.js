@@ -36,7 +36,6 @@ export const getCards = async (req, res) => {
 export const deleteCard = async (req, res) => {
   const { cardId } = req.body;
   const userId = req.user.id;
-  console.log(cardId);
 
   const selectedCard =
     "DELETE FROM shopping_list WHERE shopping_list.id = $1 and shopping_list.user_id = $2";
@@ -46,5 +45,26 @@ export const deleteCard = async (req, res) => {
     return res.status(200).json({ success: true });
   } catch (error) {
     return res.status(500).json({ error: "Failed to delete card" });
+  }
+};
+
+export const editCard = async (req, res) => {
+  const { name, cardSet, marketPrice, cardId } = req.body;
+  const userId = req.user.id;
+
+  const cardToEdit =
+    "UPDATE shopping_list SET name = $1, set = $2, market_price = $3 WHERE id = $4 and user_id = $5";
+
+  try {
+    const result = await pool.query(cardToEdit, [
+      name,
+      cardSet,
+      marketPrice,
+      cardId,
+      userId,
+    ]);
+    return res.status(200).json({ success: true });
+  } catch (error) {
+    return res.status(500).json({ error: "Failed to edit card" });
   }
 };

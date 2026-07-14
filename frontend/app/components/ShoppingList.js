@@ -61,6 +61,8 @@ export default function ShoppingList() {
             formData={formData}
             setFormData={setFormData}
             setEditClicked={setEditClicked}
+            selectedCard={selectedCard}
+            getCardsList={getCardsList}
           />
         )}
         <ShoppingForm getCardsList={getCardsList} />
