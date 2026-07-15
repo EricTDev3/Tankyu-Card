@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ShopCard from "./ShopCard";
-import Sidebar from "./Sidebar";
 
 export default function MustVisitShops() {
   const [savedShops, setSavedShops] = useState([]);
@@ -28,8 +27,7 @@ export default function MustVisitShops() {
 
   return (
     <>
-      <div className="flex bg-blue-500">
-        <Sidebar />
+      <div className="flex min-h-screen bg-blue-500">
         <div className="flex-1 flex-col">
           <h1 className="bg-green-200 text-center">TCG WAYPOINTS</h1>
           <div

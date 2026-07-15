@@ -1,5 +1,5 @@
 "use client";
-import TCGWaypoints from "../components/tcgWaypoints";
+import TCGWaypoints from "../../components/tcgWaypoints";
 
 export default function TCGWaypointsPage() {
   return (

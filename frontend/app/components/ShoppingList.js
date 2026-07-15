@@ -2,7 +2,6 @@
 import { useState } from "react";
 import ShoppingForm from "./ShoppingForm";
 import CardEditingModal from "./CardEditingModal";
-import Sidebar from "./Sidebar";
 import axios from "axios";
 import { IconButton } from "@material-tailwind/react";
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/solid";
@@ -54,7 +53,6 @@ export default function ShoppingList() {
 
   return (
     <div className="flex h-screen">
-      <Sidebar />
       <div className="flex flex-col items-center flex-1 min-h-screen overflow-y-auto">
         {editClicked && (
           <CardEditingModal

@@ -1,5 +1,5 @@
 "use client";
-import ShoppingList from "../components/ShoppingList";
+import ShoppingList from "../../components/ShoppingList";
 
 export default function ShoppingListPage() {
   return (
