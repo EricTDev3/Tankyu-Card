@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import CurrencyConverter from "./CurrencyConverter";
 import axios from "axios";
 
 export default function ShoppingForm({ getCardsList }) {
@@ -92,7 +91,6 @@ export default function ShoppingForm({ getCardsList }) {
           </button>
         </div>
       </form>
-      <CurrencyConverter />
     </div>
   );
 }
