@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ShoppingForm from "./ShoppingForm";
 import CardEditingModal from "./CardEditingModal";
 import Sidebar from "./Sidebar";

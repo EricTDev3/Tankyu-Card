@@ -45,26 +45,35 @@ export default function CurrencyConverter() {
 
   return (
     <>
-      <div className="flex px-12 py-12">
-        <div className="mr-2">
-          <input
-            type="number"
-            placeholder="YEN"
-            onChange={handleYenConversion}
-            value={yen}
-            className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
-          ></input>
-          <label>Japanese Yen</label>
-        </div>
-        <div>
-          <input
-            type="number"
-            placeholder="USD"
-            onChange={handleUSDConversion}
-            value={usd}
-            className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
-          ></input>
-          <label>United States Dollar</label>
+      <div className="flex flex-col h-screen justify-center items-center w-full px-12 py-12 bg-[#79a471] bg-[url('../images/currency.png')]">
+        <h1 className="flex justify-center text-[#105a37] text-6xl font-extrabold">
+          Currency Converter
+        </h1>
+        <p className="mb-4 italic text-sm">
+          Convert the card price or any products from Japanese yen to US dollars
+          to make sure you&apos;re getting a good deal!
+        </p>
+        <div className="flex flex-row gap-8 justify-center border-4 border-solid border-[#1a652a] rounded-md mt-6 p-8">
+          <div className="mr-2">
+            <input
+              type="number"
+              placeholder="YEN"
+              onChange={handleYenConversion}
+              value={yen}
+              className="block rounded-md w-48 bg-white px-3 py-1.5 text-base text-[#1a652a] outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
+            ></input>
+            <label>🇯🇵 Japanese Yen</label>
+          </div>
+          <div>
+            <input
+              type="number"
+              placeholder="USD"
+              onChange={handleUSDConversion}
+              value={usd}
+              className="block w-48 rounded-md bg-white px-3 py-1.5 text-base text-[#1a652a] outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
+            ></input>
+            <label>🇺🇸 United States Dollar</label>
+          </div>
         </div>
       </div>
     </>
