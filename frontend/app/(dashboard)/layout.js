@@ -14,11 +14,13 @@ export default function DashboardLayout({ children }) {
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
         />
       </header>
-      <div className="flex">
-        <Sidebar
-          isSidebarOpen={isSidebarOpen}
-          setIsSidebarOpen={setIsSidebarOpen}
-        />
+      <div className="md:flex">
+        <div className={`${isSidebarOpen ? "block" : "hidden"} md:block`}>
+          <Sidebar
+            isSidebarOpen={isSidebarOpen}
+            setIsSidebarOpen={setIsSidebarOpen}
+          />
+        </div>
         <main className="flex-1">{children}</main>
       </div>
     </>

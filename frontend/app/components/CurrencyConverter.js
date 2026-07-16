@@ -45,15 +45,15 @@ export default function CurrencyConverter() {
 
   return (
     <>
-      <div className="flex flex-col min-h-screen justify-center items-center w-full px-12 py-12 bg-[#79a471] bg-[url('../images/currency.png')] bg-cover bg-center bg-no-repeat">
-        <h1 className="flex justify-center text-[#105a37] text-6xl font-extrabold mb-4">
+      <div className="flex flex-col min-h-screen  md:items-center items-center w-full px-6 md:px-12 py-12 bg-[#79a471] bg-[url('../images/currency.png')] bg-cover bg-center bg-no-repeat">
+        <h1 className="flex justify-center text-[#105a37] text-6xl px-6 font-extrabold mb-4">
           Currency Converter
         </h1>
         <p className="mb-4 italic text-sm">
           Convert the card price or any products from Japanese yen to US dollars
           to make sure you&apos;re getting a good deal!
         </p>
-        <div className="flex flex-row gap-8 justify-center border-4 border-solid border-[#1a652a] rounded-md mt-6 p-8">
+        <div className="flex flex-col md:flex-row gap-8 justify-center border-4 border-solid border-[#1a652a] rounded-md mt-6 p-8">
           <div className="mr-2">
             <input
               type="number"
