@@ -14,14 +14,12 @@ import {
   BuildingStorefrontIcon,
   BuildingOffice2Icon,
   PowerIcon,
-  Bars3Icon,
+  XCircleIcon,
 } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import axios from "axios";
 
-export default function Sidebar() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
   const router = useRouter();
 
   const handleLogout = async () => {
@@ -35,14 +33,14 @@ export default function Sidebar() {
 
   return (
     <>
-      <Bars3Icon
-        className="md:hidden"
-        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-      />
       <Card
-        className={`${isSidebarOpen ? "block" : "hidden"} md:block sticky top-0 h-screen w-full max-w-[20rem] p-4 shadow-xl             shadow-blue-gray-900/5 bg-yellow-300`}
+        className={`${isSidebarOpen ? "block" : "hidden"} md:block fixed top-0 left-0 bottom-0 z-50 md:sticky md:top-0 md:z-auto h-screen w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 bg-yellow-300`}
       >
         <div className="mb-2 p-4">
+          <XCircleIcon
+            className="flex justify-self-end w-8 text-purple-600 cursor-pointer md:hidden"
+            onClick={() => setIsSidebarOpen(false)}
+          />
           <Typography
             variant="h5"
             color="blue-gray"

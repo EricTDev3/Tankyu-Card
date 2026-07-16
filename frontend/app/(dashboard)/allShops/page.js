@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import ShopGrid from "../../components/ShopGrid";
 
 export default function ShopsPage() {
