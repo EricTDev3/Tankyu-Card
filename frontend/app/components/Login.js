@@ -33,7 +33,7 @@ export default function Login() {
       <div className="w-full max-w-sm">
         <div>
           <Image
-            src="../images/cards.png"
+            src="/images/cards.png"
             alt="logo"
             width={200}
             height={180}

@@ -2,6 +2,19 @@
 @plugin "@tailwindcss/forms";
 @plugin "daisyui";
 
+@font-face {
+  font-family: "HiroMikase";
+  src: url("/fonts/HiroMisakeJapaneseGraffiti-5yG0a.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@layer utilities {
+  .font-hiro {
+    font-family: "HiroMikase", system-ui;
+  }
+}
+
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
