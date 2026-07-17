@@ -45,8 +45,8 @@ export default function CurrencyConverter() {
 
   return (
     <>
-      <div className="flex flex-col min-h-screen  md:items-center items-center w-full px-6 md:px-12 py-12 bg-[#79a471] bg-[url('../images/currency.png')] bg-cover bg-center bg-no-repeat">
-        <h1 className="flex justify-center text-[#105a37] text-6xl px-6 font-extrabold mb-4">
+      <div className="flex flex-col min-h-screen  md:items-center items-center w-full px-6 md:px-12 py-12 bg-[#79a471] bg-[url('/images/currency.png')] bg-cover bg-center bg-no-repeat">
+        <h1 className="flex justify-center text-[#105a37] text-6xl px-12 font-extrabold mb-4">
           Currency Converter
         </h1>
         <p className="mb-4 italic text-sm">
