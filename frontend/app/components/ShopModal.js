@@ -19,13 +19,13 @@ export default function ShopModal({ shop, onClose }) {
         open
         aria-labelledby="modalTitle"
         aria-describedby="modalDescription"
-        className="m-auto max-w-xl rounded-lg bg-white p-6 shadow-lg backdrop:bg-black/50 bg-[url('/images/sakuraModal.png')] bg-cover bg-no-repeat"
+        className="m-auto flex flex-col max-w-xl rounded-lg bg-white p-6 shadow-lg backdrop:bg-black/50 bg-[url('/images/sakuraModal.png')] bg-cover bg-no-repeat"
       >
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-5">
           <div className="flex items-start justify-between">
             <h2
               id="modalTitle"
-              className="text-xl font-bold text-gray-900 sm:text-2xl"
+              className="font-hiro text-3xl text-red-900 drop-shadow-sm"
             >
               {shop.shop_name}
             </h2>
@@ -33,7 +33,7 @@ export default function ShopModal({ shop, onClose }) {
             <button
               type="button"
               data-modal-close
-              className="-me-4 -mt-4 rounded-full p-2 text-gray-600 transition-colors hover:text-gray-900 focus:ring-2 cursor-pointer focus:ring-indigo-600 border-2 border-indigo-600 focus:ring-offset-2 focus:ring-offset-white focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2 focus-visible:ring-offset-white focus-visible:outline-none"
+              className="-me-4 -mt-4 rounded-full border-2 border-red-800 bg-white/80 p-2 text-red-800 transition hover:bg-red-800 hover:text-white cursor-pointer"
               aria-label="Close"
               onClick={onClose}
             >
@@ -54,31 +54,47 @@ export default function ShopModal({ shop, onClose }) {
               </svg>
             </button>
           </div>
-          <p id="modalDescription" className="text-pretty text-gray-700">
-            <span className="font-bold">Address:</span> {shop.address}
+          <p
+            id="modalDescription"
+            className="rounded-md bg-white/70 px-4 py-3 text-base leading-7 text-gray-800 backdrop-blur-sm"
+          >
+            <span className="font-semibold text-red-900">Address:</span>{" "}
+            {shop.address}
           </p>
-          <p id="modalDescription" className="text-pretty text-gray-700">
-            <span className="font-bold">Shop Hours:</span> {shop.store_hours}
+          <p
+            id="modalDescription"
+            className="rounded-md bg-white/70 px-4 py-3 text-base leading-7 text-gray-800 backdrop-blur-sm"
+          >
+            <span className="font-semibold text-red-900">Shop Hours:</span>{" "}
+            {shop.store_hours}
           </p>
-          <p id="modalDescription" className="text-pretty text-gray-700">
-            <span className="font-bold">Neighborhood:</span> {shop.neighborhood}{" "}
-            <span className="font-bold">City:</span> {shop.city}
+          <p
+            id="modalDescription"
+            className="rounded-md bg-white/70 px-4 py-3 text-base leading-7 text-gray-800 backdrop-blur-sm"
+          >
+            <span className="font-semibold text-red-900">Neighborhood:</span>{" "}
+            {shop.neighborhood}{" "}
+            <span className="font-semibold text-red-900">City:</span>{" "}
+            {shop.city}
           </p>
           <p className="mt-2 line-clamp-2 text-pretty">
-            <span className="font-bold">TCG Sets sold:</span>{" "}
+            <span className="font-semibold text-red-900">TCG Sets sold:</span>{" "}
             {shop.card_set_sold.map((set, index) =>
               index === shop.card_set_sold.length - 1 ? `${set}` : `${set}, `,
             )}
           </p>
-          <p id="modalDescription" className="text-pretty text-gray-700">
+          <p
+            id="modalDescription"
+            className="mt-2 rounded-md bg-white/60 p-4 leading-7 text-gray-700 backdrop-blur-sm"
+          >
             {shop.description}
           </p>
         </div>
         <button
-          className="flex justify-self-end rounded-full w-8 h-8 items-center cursor-pointer justify-center border border-indigo-600 bg-indigo-600 text-white shadow-sm transition-colors hover:bg-indigo-400 focus-visible:ring-4 focus-visible:ring-indigo-100 focus-visible:outline-none"
+          className="self-end rounded-full bg-red-900 px-5 py-2 font-medium text-white shadow-md cursor-pointer transition-all hover:bg-red-700 hover:shadow-lg"
           onClick={() => handleAddShop(shop.id)}
         >
-          +
+          Add Shop
         </button>
       </dialog>
     </div>

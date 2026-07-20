@@ -45,7 +45,7 @@ export default function ShopGrid() {
           <button
             key={city}
             type="submit"
-            className="rounded-md bg-white px-3 py-1.5 text-sm font-semibold text-red-500 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 cursor-pointer "
+            className="rounded-md bg-white px-3 py-1.5 text-sm font-semibold text-red-500 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 cursor-pointer"
             onClick={() => handleCity(city)}
           >
             {city}

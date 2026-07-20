@@ -11,9 +11,6 @@ export default function ShopCard({ shop, action }) {
             {shop.shop_name}
           </h3>
 
-          {/* <p className="mt-3 text-base leading-relaxed text-gray-900">
-          <span className="font-bold">Address:</span> {shop.address}
-        </p> */}
           <div className="mt-4 divide-y divide-red-200 text-sm">
             <div className="flex py-2">
               <span className="w-24 font-semibold text-red-900">Address:</span>
@@ -27,11 +24,6 @@ export default function ShopCard({ shop, action }) {
               {shop.card_set_sold.join(", ")}
             </span>
           </div>
-
-          {/* <p className="mt-2 text-base leading-relaxed text-gray-900">
-            <span className="font-bold">TCG Sets sold:</span>{" "}
-            {shop.card_set_sold.join(", ")}
-          </p> */}
 
           {action}
         </div>
