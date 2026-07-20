@@ -83,7 +83,7 @@ export default function CardEditingModal({
                 className: "before:content-none after:content-none",
               }}
             />
-            <Button className="mt-6 bg-purple-500" type="submit">
+            <Button className="mt-6 bg-purple-500 cursor-pointer" type="submit">
               Submit Edits
             </Button>
           </div>
