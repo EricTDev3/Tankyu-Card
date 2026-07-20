@@ -63,7 +63,7 @@ export default function ShoppingList() {
           />
         )}
         <ShoppingForm getCardsList={getCardsList} />
-        <table className="table mx-auto w-auto bg-gray-200">
+        <table className="table mx-auto w-auto bg-gray-200 mt-6">
           <thead>
             <tr className="text-blue-600">
               <th className="px-8">Name</th>
