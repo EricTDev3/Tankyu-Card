@@ -3,7 +3,8 @@ export default function ShopCard({ shop, action }) {
     <>
       <a
         href="#"
-        className="relative block overflow-hidden border-2 border-black bg-[url('/images/sakuraCard.png')] bg-cover bg-center bg-no-repeat shadow-[4px_4px_0_0] shadow-black"
+        //className="relative block overflow-hidden border-2 border-black bg-[url('/images/sakuraCard.png')] bg-cover bg-center bg-no-repeat shadow-[4px_4px_0_0] shadow-black"
+        className="relative block overflow-hidden border-2 border-black bg-white shadow-[4px_4px_0_0] shadow-black"
       >
         {/* White overlay */}
         <div className="bg-white/75 backdrop-blur-sm p-4">
