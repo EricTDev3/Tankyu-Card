@@ -43,15 +43,14 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
           />
           <Typography
             variant="h5"
-            color="blue-gray"
-            className="text-purple-600"
+            className="text-purple-600 text-2xl font-hiro"
           >
             TANKYU CARD
           </Typography>
         </div>
         <List>
           <ListItem
-            className="mb-2 cursor-pointer hover:font-bold"
+            className="mb-2 cursor-pointer hover:font-bold font-hiro"
             onClick={() => router.push("/allShops")}
           >
             <ListItemPrefix>
@@ -60,7 +59,7 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
             All Shops
           </ListItem>
           <ListItem
-            className="mb-2 cursor-pointer hover:font-bold"
+            className="mb-2 cursor-pointer hover:font-bold font-hiro"
             onClick={() => router.push("/tcgWaypoints")}
           >
             <ListItemPrefix>
@@ -69,7 +68,7 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
             TCG Waypoints
           </ListItem>
           <ListItem
-            className="mb-2 cursor-pointer hover:font-bold"
+            className="mb-2 cursor-pointer hover:font-bold font-hiro"
             onClick={() => router.push("/shoppingList")}
           >
             <ListItemPrefix>
@@ -78,7 +77,7 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
             Shopping List
           </ListItem>
           <ListItem
-            className="mb-2 cursor-pointer hover:font-bold"
+            className="mb-2 cursor-pointer hover:font-bold font-hiro"
             onClick={() => router.push("/currencyConverter")}
           >
             <ListItemPrefix>
@@ -86,14 +85,14 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
             </ListItemPrefix>
             Currency Conversion Tool
           </ListItem>
-          <ListItem className="mb-2 cursor-pointer hover:font-bold">
+          <ListItem className="mb-2 cursor-pointer hover:font-bold font-hiro">
             <ListItemPrefix>
               <UserCircleIcon className="h-5 w-5" />
             </ListItemPrefix>
             Profile
           </ListItem>
           <ListItem
-            className="mb-2 cursor-pointer hover:font-bold"
+            className="mb-2 cursor-pointer hover:font-bold font-hiro"
             onClick={handleLogout}
           >
             <ListItemPrefix>
