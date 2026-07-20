@@ -19,7 +19,7 @@ export default function ShopModal({ shop, onClose }) {
         open
         aria-labelledby="modalTitle"
         aria-describedby="modalDescription"
-        className="m-auto max-w-xl rounded-lg bg-white p-6 shadow-lg backdrop:bg-black/50"
+        className="m-auto max-w-xl rounded-lg bg-white p-6 shadow-lg backdrop:bg-black/50 bg-[url('/images/sakuraModal.png')] bg-cover bg-no-repeat"
       >
         <div className="flex flex-col gap-4">
           <div className="flex items-start justify-between">
