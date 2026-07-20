@@ -92,7 +92,10 @@ export default function ShopModal({ shop, onClose }) {
         </div>
         <button
           className="self-end rounded-full bg-red-900 px-5 py-2 font-medium text-white shadow-md cursor-pointer transition-all hover:bg-red-700 hover:shadow-lg"
-          onClick={() => handleAddShop(shop.id)}
+          onClick={() => {
+            handleAddShop(shop.id);
+            onClose();
+          }}
         >
           Add Shop
         </button>
