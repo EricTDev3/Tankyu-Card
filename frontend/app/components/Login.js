@@ -15,7 +15,7 @@ export default function Login() {
 
     try {
       const userLogin = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
+        "/api/auth/login",
         {
           email,
           password,

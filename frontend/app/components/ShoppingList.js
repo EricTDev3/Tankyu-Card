@@ -28,10 +28,9 @@ export default function ShoppingList() {
 
   const getCardsList = async () => {
     try {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/shoppingList/getCards`,
-        { withCredentials: true },
-      );
+      const response = await axios.get("/api/shoppingList/getCards", {
+        withCredentials: true,
+      });
       setCardList(response.data.shopping_list);
     } catch (error) {
       console.error(error);
@@ -40,10 +39,10 @@ export default function ShoppingList() {
 
   const handleDeleteCard = async (cardId) => {
     try {
-      const response = await axios.delete(
-        `${process.env.NEXT_PUBLIC_API_URL}/shoppingList/deleteCard`,
-        { withCredentials: true, data: { cardId } },
-      );
+      const response = await axios.delete("/api/shoppingList/deleteCard", {
+        withCredentials: true,
+        data: { cardId },
+      });
       const updatedCardList = cardList.filter((card) => card.id !== cardId);
       setCardList(updatedCardList);
     } catch (error) {

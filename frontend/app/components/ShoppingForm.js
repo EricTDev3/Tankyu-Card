@@ -16,7 +16,7 @@ export default function ShoppingForm({ getCardsList }) {
 
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/shoppingList/addCard`,
+        "/api/shoppingList/addCard",
         { name, set, marketPrice },
         { withCredentials: true },
       );

@@ -23,11 +23,7 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
   const router = useRouter();
 
   const handleLogout = async () => {
-    await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/auth/logout`,
-      {},
-      { withCredentials: true },
-    );
+    await axios.post("/api/auth/logout", {}, { withCredentials: true });
     router.push("/");
   };
 

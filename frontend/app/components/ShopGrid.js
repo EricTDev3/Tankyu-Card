@@ -16,10 +16,9 @@ export default function ShopGrid() {
 
   useEffect(() => {
     const fetchShops = async () => {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/shops/getAllShops`,
-        { withCredentials: true },
-      );
+      const response = await axios.get("/api/shops/getAllShops", {
+        withCredentials: true,
+      });
       setShops(response.data.shops);
     };
     fetchShops();

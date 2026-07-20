@@ -4,7 +4,7 @@ export default function ShopModal({ shop, onClose }) {
   const handleAddShop = async (id) => {
     try {
       const reponse = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/shops/savedShops`,
+        "/api/shops/savedShops",
         { shopId: id },
         { withCredentials: true },
       );

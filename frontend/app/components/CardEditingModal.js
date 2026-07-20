@@ -12,7 +12,7 @@ export default function CardEditingModal({
     e.preventDefault();
 
     const result = await axios.patch(
-      `${process.env.NEXT_PUBLIC_API_URL}/shoppingList/editCard`,
+      "/api/shoppingList/editCard",
       { ...formData, cardId: selectedCard.id },
       { withCredentials: true },
     );

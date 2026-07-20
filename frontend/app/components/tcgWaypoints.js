@@ -7,20 +7,19 @@ export default function MustVisitShops() {
 
   useEffect(() => {
     const fetchSavedShops = async () => {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/shops/getSavedShops`,
-        { withCredentials: true },
-      );
+      const response = await axios.get("/api/shops/getSavedShops", {
+        withCredentials: true,
+      });
       setSavedShops(response.data.shopData);
     };
     fetchSavedShops();
   }, []);
 
   const handleRemoveShop = async (shopId) => {
-    const response = await axios.delete(
-      `${process.env.NEXT_PUBLIC_API_URL}/shops/deleteSavedShop`,
-      { withCredentials: true, data: { shopId } },
-    );
+    const response = await axios.delete("/api/shops/deleteSavedShop", {
+      withCredentials: true,
+      data: { shopId },
+    });
     const filteredShops = savedShops.filter((shop) => shop.shop_id !== shopId);
     setSavedShops(filteredShops);
   };
