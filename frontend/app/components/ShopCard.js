@@ -13,16 +13,27 @@ export default function ShopCard({ shop, action }) {
 
           <div className="mt-4 divide-y divide-red-200 text-sm">
             <div className="flex py-2">
-              <span className="w-24 font-semibold text-red-900">Address:</span>
+              <span className="w-32 shrink-0 font-semibold text-red-900">
+                Address:
+              </span>
               <span className="flex-1 text-gray-700">{shop.address}</span>
             </div>
-          </div>
 
-          <div className="flex py-2">
-            <span className="w-24 font-semibold text-red-900">TCG Sets</span>
-            <span className="flex-1 text-gray-700">
-              {shop.card_set_sold.join(", ")}
-            </span>
+            <div className="flex py-2">
+              <span className="w-32 shrink-0 font-semibold text-red-900">
+                Neighborhood:
+              </span>
+              <span className="flex-1 text-gray-700">{shop.neighborhood}</span>
+            </div>
+
+            <div className="flex py-2">
+              <span className="w-32 shrink-0 font-semibold text-red-900">
+                TCG Sets:
+              </span>
+              <span className="flex-1 text-gray-700">
+                {shop.card_set_sold.join(", ")}
+              </span>
+            </div>
           </div>
 
           {action}
