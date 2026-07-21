@@ -51,8 +51,8 @@ export default function ShoppingList() {
   };
 
   return (
-    <div className="flex h-screen">
-      <div className="flex flex-col items-center flex-1 min-h-screen overflow-y-auto">
+    <div className="flex h-screen bg-[url('/images/cardShops.png')] bg-cover bg-center bg-no-repeat">
+      <div className="flex flex-col mt-50 md:mt-48 md:ml-30 md:items-center items-start flex-1 min-h-screen overflow-y-auto">
         {editClicked && (
           <CardEditingModal
             formData={formData}

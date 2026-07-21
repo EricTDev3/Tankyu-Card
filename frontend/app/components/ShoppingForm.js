@@ -36,9 +36,9 @@ export default function ShoppingForm({ getCardsList }) {
       onSubmit={handleSubmit}
       action="#"
       method="POST"
-      className="mt-10 flex flex-col md:flex-row gap-4 md:items-end w-full justify-center"
+      className="flex flex-col md:flex-row gap-4 md:items-end mt-10 items-start"
     >
-      <div>
+      <div className="w-full md:w-auto ml-2">
         <div className="mt-2">
           <input
             id="name"
@@ -48,12 +48,12 @@ export default function ShoppingForm({ getCardsList }) {
             onChange={(e) => setName(e.target.value)}
             placeholder="card name"
             required
-            className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
+            className="block w-full md:w-48 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
           />
         </div>
       </div>
 
-      <div>
+      <div className="w-full md:w-auto ml-2">
         <div className="mt-2">
           <input
             id="set"
@@ -62,12 +62,12 @@ export default function ShoppingForm({ getCardsList }) {
             value={set}
             placeholder="set name"
             onChange={(e) => setSet(e.target.value)}
-            className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
+            className="block w-full md:w-48 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
           />
         </div>
       </div>
 
-      <div>
+      <div className="w-full md:w-auto ml-2">
         <div className="mt-2">
           <input
             id="marketPrice"
@@ -76,7 +76,7 @@ export default function ShoppingForm({ getCardsList }) {
             placeholder="market price"
             value={marketPrice}
             onChange={(e) => setMarketPrice(e.target.value)}
-            className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
+            className="block w-full md:w-48 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
           />
         </div>
       </div>
@@ -84,7 +84,7 @@ export default function ShoppingForm({ getCardsList }) {
       <div>
         <button
           type="submit"
-          className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer"
+          className="flex ml-2 rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer"
         >
           Add To List
         </button>
