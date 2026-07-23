@@ -22,7 +22,7 @@ export default function Login() {
         },
         { withCredentials: true },
       );
-      router.push("/shoppingList");
+      router.push("/allShops");
     } catch (error) {
       console.error(error);
     }
