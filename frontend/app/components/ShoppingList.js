@@ -63,33 +63,37 @@ export default function ShoppingList() {
           />
         )}
         <ShoppingForm getCardsList={getCardsList} />
-        <table className="table mx-auto w-auto bg-gray-200 mt-6">
-          <thead>
-            <tr className="text-blue-600">
-              <th className="px-8">Name</th>
-              <th className="px-8">Set</th>
-              <th className="px-8">Market Price</th>
-              <th className="px-8">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {cardList.map((card) => (
-              <tr key={card.id}>
-                <td className="px-8">{card.name}</td>
-                <td className="px-8">{card.set}</td>
-                <td className="px-8">${card.market_price}</td>
-                <td className="px-8 flex gap-2">
-                  <IconButton onClick={() => handleEditCard(card)}>
-                    <PencilSquareIcon className="h-5 w-5 cursor-pointer bg-blue-500 hover:bg-sky-800 active:border-b-0 active:translate-y-[4px] active:shadow-none transition-all" />
-                  </IconButton>
-                  <IconButton onClick={() => handleDeleteCard(card.id)}>
-                    <TrashIcon className="h-5 w-5 bg-red-500 hover:bg-red-800 cursor-pointer active:border-b-0 active:translate-y-[4px] active:shadow-none transition-all" />
-                  </IconButton>
-                </td>
+        <div className="md:w-3/4 mx-auto mt-6 bg-[url('/images/woodenBoard.png')] bg-cover bg-center bg-no-repeat rounded-lg p-4">
+          <table className="table w-full">
+            <thead>
+              <tr className="text-white text-center">
+                <th className="pl-6">Name</th>
+                <th>Set</th>
+                <th>Market Price</th>
+                <th className="pr-9">Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {cardList.map((card) => (
+                <tr key={card.id} className="text-center">
+                  <td className="text-black font-bold">{card.name}</td>
+                  <td className="text-black font-bold">{card.set}</td>
+                  <td className="text-black font-bold">${card.market_price}</td>
+                  <td>
+                    <div className="flex gap-2 justify-center mr-4">
+                      <IconButton onClick={() => handleEditCard(card)}>
+                        <PencilSquareIcon className="h-5 w-5 cursor-pointer bg-blue-500 hover:bg-sky-800 active:border-b-0 active:translate-y-[4px] active:shadow-none transition-all" />
+                      </IconButton>
+                      <IconButton onClick={() => handleDeleteCard(card.id)}>
+                        <TrashIcon className="h-5 w-5 bg-red-500 hover:bg-red-800 cursor-pointer active:border-b-0 active:translate-y-[4px] active:shadow-none transition-all" />
+                      </IconButton>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
