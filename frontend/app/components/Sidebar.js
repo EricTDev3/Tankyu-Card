@@ -28,7 +28,7 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
   };
 
   return (
-    <div className="bg-[url('/images/sidebar.png')] bg-cover bg-center bg-no-repeat">
+    <div className="bg-[url('/images/sidebar.png')] bg-cover bg-center bg-no-repeat h-full">
       <Card
         className={`${isSidebarOpen ? "block" : "hidden"} md:block fixed top-0 left-0 bottom-0 z-50 md:sticky md:top-0 md:z-auto h-screen w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 bg-[url('/images/sidebar.png')] bg-cover bg-center bg-no-repeat`}
       >
