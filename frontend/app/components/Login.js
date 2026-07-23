@@ -29,7 +29,7 @@ export default function Login() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center px-6 py-12 lg:px-8">
+    <div className="flex min-h-screen items-center font-hiro justify-center px-6 py-12 lg:px-8 bg-[url('/images/loginSignup.png')] bg-cover bg-center bg-no-repeat h-full">
       <div className="w-full max-w-sm">
         <div>
           <Image
@@ -115,7 +115,7 @@ export default function Login() {
           </div>
         </form>
 
-        <p className="mt-10 text-center text-sm/6 text-gray-500">
+        <p className="mt-10 text-center text-sm/6 text-black-900">
           Not a member?{" "}
           <a
             href="/signUp"
