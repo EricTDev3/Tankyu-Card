@@ -1,24 +1,46 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+const schema = yup
+  .object({
+    email: yup
+      .string()
+      .email("Enter a valid email")
+      .required("email is required"),
+    password: yup
+      .string()
+      .min(8, "Password must be at least 8 characters")
+      .matches(
+        /[!@#$%^&*(),.?":{}|<>]/,
+        "Password must contain at least one special character",
+      )
+      .required("Password is required"),
+  })
+  .required();
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
   const router = useRouter();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleLoginSubmit = async (data) => {
     try {
       const userLogin = await axios.post(
         "/api/auth/login",
         {
-          email,
-          password,
+          email: data.email,
+          password: data.password,
         },
         { withCredentials: true },
       );
@@ -48,7 +70,7 @@ export default function Login() {
         </div>
 
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(handleLoginSubmit)}
           action="#"
           method="POST"
           className="mt-10 space-y-6"
@@ -65,8 +87,7 @@ export default function Login() {
                 id="email"
                 name="email"
                 type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                {...register("email", { required: true })}
                 required
                 autoComplete="email"
                 className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
@@ -96,8 +117,7 @@ export default function Login() {
                 id="password"
                 name="password"
                 type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                {...register("password", { required: true })}
                 required
                 autoComplete="current-password"
                 className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
@@ -108,7 +128,7 @@ export default function Login() {
           <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="flex w-full justify-center cursor-pointer rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Sign in
             </button>
