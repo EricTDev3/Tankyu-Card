@@ -1,26 +1,56 @@
 "use client";
-import { useState } from "react";
 import Image from "next/image";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+const schema = yup
+  .object({
+    email: yup
+      .string()
+      .email("Enter a valid email")
+      .required("Card name is required"),
+    password: yup
+      .string()
+      .min(8, "Password must be at least 8 characters")
+      .matches(
+        /[!@#$%^&*(),.?":{}|<>]/,
+        "Password must contain at least one special character",
+      ),
+    confirmPassword: yup
+      .string()
+      .min(8, "Password must be at least 8 characters")
+      .oneOf([yup.ref("password")], "Passwords do not match")
+      .matches(
+        /[!@#$%^&*(),.?":{}|<>]/,
+        "Password must contain at least one special character",
+      )
+      .required("Password is required"),
+  })
+  .required();
 
 export default function SignUp() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+  const watchPassword = watch("password");
+  const watchConfirmPassword = watch("confirmPassword");
 
   const router = useRouter();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleSignupSubmit = async (data) => {
     try {
-      if (password === confirmPassword) {
-        const newUser = await axios.post("/api/auth/signUp", {
-          email,
-          password,
-        });
-      }
+      const newUser = await axios.post("/api/auth/signUp", {
+        email: data.email,
+        password: data.password,
+      });
       router.push("/login");
     } catch (error) {
       console.error(error);
@@ -47,7 +77,7 @@ export default function SignUp() {
         </div>
 
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(handleSignupSubmit)}
           action="#"
           method="POST"
           className="mt-10 space-y-6"
@@ -64,8 +94,7 @@ export default function SignUp() {
                 id="email"
                 name="email"
                 type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                {...register("email", { required: true })}
                 required
                 autoComplete="email"
                 className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
@@ -88,8 +117,7 @@ export default function SignUp() {
                 id="password"
                 name="password"
                 type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                {...register("password", { required: true })}
                 required
                 autoComplete="current-password"
                 className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
@@ -107,17 +135,16 @@ export default function SignUp() {
             </div>
             <div className="mt-2">
               <input
-                id="password"
-                name="password"
+                id="confirmPassword"
+                name="confirmPassword"
                 type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                {...register("confirmPassword", { required: true })}
                 required
                 autoComplete="current-password"
                 className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
               />
             </div>
-            {confirmPassword && confirmPassword !== password ? (
+            {watchConfirmPassword && watchConfirmPassword !== watchPassword ? (
               <h4 className="text-red-500">Passwords do not match</h4>
             ) : null}
           </div>
@@ -125,7 +152,7 @@ export default function SignUp() {
           <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="flex w-full justify-center cursor-pointer rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Register
             </button>
