@@ -1,29 +1,38 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import axios from "axios";
 
+const schema = yup
+  .object({
+    cardName: yup.string().required(),
+    set: yup.string().required(),
+    marketPrice: yup.number().positive("Price must be positive").required(),
+  })
+  .required();
+
 export default function ShoppingForm({ getCardsList }) {
-  const [name, setName] = useState("");
-  const [set, setSet] = useState("");
-  const [marketPrice, setMarketPrice] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
   useEffect(() => {
     getCardsList();
   }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleFormSubmit = async (data) => {
     try {
       const response = await axios.post(
         "/api/shoppingList/addCard",
-        { name, set, marketPrice },
+        { name: data.cardName, set: data.set, marketPrice: data.marketPrice },
         { withCredentials: true },
       );
-
-      setName("");
-      setSet("");
-      setMarketPrice("");
 
       getCardsList();
     } catch (error) {
@@ -33,7 +42,7 @@ export default function ShoppingForm({ getCardsList }) {
 
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(handleFormSubmit)}
       action="#"
       method="POST"
       className="flex flex-col md:flex-row gap-4 md:items-end mt-10 items-start"
@@ -41,11 +50,10 @@ export default function ShoppingForm({ getCardsList }) {
       <div className="w-full md:w-auto ml-2">
         <div className="mt-2">
           <input
-            id="name"
-            name="name"
+            id="cardName"
+            name="cardName"
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            {...register("cardName", { required: true })}
             placeholder="card name"
             required
             className="block w-full md:w-48 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
@@ -59,9 +67,8 @@ export default function ShoppingForm({ getCardsList }) {
             id="set"
             name="set"
             type="text"
-            value={set}
+            {...register("set", { required: true })}
             placeholder="set name"
-            onChange={(e) => setSet(e.target.value)}
             className="block w-full md:w-48 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
           />
         </div>
@@ -74,8 +81,7 @@ export default function ShoppingForm({ getCardsList }) {
             name="marketPrice"
             type="number"
             placeholder="market price"
-            value={marketPrice}
-            onChange={(e) => setMarketPrice(e.target.value)}
+            {...register("marketPrice", { required: true })}
             className="block w-full md:w-48 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
           />
         </div>
