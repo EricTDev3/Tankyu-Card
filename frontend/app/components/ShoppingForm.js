@@ -7,8 +7,8 @@ import axios from "axios";
 
 const schema = yup
   .object({
-    cardName: yup.string().required(),
-    set: yup.string().required(),
+    cardName: yup.string().required("Card name is required"),
+    set: yup.string().required("Set name is required"),
     marketPrice: yup.number().positive("Price must be positive").required(),
   })
   .required();
