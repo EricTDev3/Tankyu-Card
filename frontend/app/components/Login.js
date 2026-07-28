@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import axios from "axios";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -24,6 +25,7 @@ const schema = yup
   .required();
 
 export default function Login() {
+  const [error, setError] = useState("");
   const {
     register,
     handleSubmit,
@@ -35,8 +37,10 @@ export default function Login() {
   const router = useRouter();
 
   const handleLoginSubmit = async (data) => {
+    setError("");
+
     try {
-      const userLogin = await axios.post(
+      await axios.post(
         "/api/auth/login",
         {
           email: data.email,
@@ -44,9 +48,21 @@ export default function Login() {
         },
         { withCredentials: true },
       );
+
       router.push("/allShops");
     } catch (error) {
-      console.error(error);
+      // if (error.response) {
+      //   setError(error.response.data.message);
+      // } else {
+      //   setError("Something went wrong. Please try again.");
+      // }  console.log("FULL ERROR:", error);
+      console.log("SERVER MESSAGE:", error.response?.data);
+
+      if (error.response) {
+        setError(error.response.data.message);
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
     }
   };
 
@@ -87,13 +103,15 @@ export default function Login() {
                 id="email"
                 name="email"
                 type="email"
-                {...register("email", { required: true })}
-                required
+                {...register("email")}
                 autoComplete="email"
                 className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
               />
             </div>
           </div>
+          {errors.email && (
+            <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+          )}
 
           <div>
             <div className="flex items-center justify-between">
@@ -117,12 +135,21 @@ export default function Login() {
                 id="password"
                 name="password"
                 type="password"
-                {...register("password", { required: true })}
-                required
+                {...register("password")}
                 autoComplete="current-password"
                 className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
               />
             </div>
+            {errors.password && (
+              <p className="mt-1 text-sm text-red-600">
+                {errors.password.message}
+              </p>
+            )}
+            {error && (
+              <div className="mt-2 rounded-md bg-red-100 border border-red-300 p-3 text-sm text-red-700">
+                {error}
+              </div>
+            )}
           </div>
 
           <div>

@@ -35,7 +35,7 @@ export const login = async (req, res) => {
     const match = await bcrypt.compare(password, user.password);
 
     if (!match) {
-      return res.status(401).json({ message: "Wrong password" });
+      return res.status(401).json({ message: "Invalid email or password" });
     }
 
     const token = jwt.encode({ sub: user.email }, jwtSecret);
