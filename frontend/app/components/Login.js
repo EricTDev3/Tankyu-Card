@@ -146,9 +146,7 @@ export default function Login() {
               </p>
             )}
             {error && (
-              <div className="mt-2 rounded-md bg-red-100 border border-red-300 p-3 text-sm text-red-700">
-                {error}
-              </div>
+              <div className="mt-2 p-3 text-sm text-red-700">{error}</div>
             )}
           </div>
 
