@@ -65,17 +65,17 @@ export default function ShopFilters({ onApplyFilters }) {
   return (
     <>
       <div
-        className="flex flex-col md:flex-row max-w-2xl mx-auto gap-2"
+        className="flex flex-col md:flex-row max-w-2xl mx-auto gap-2 ml-2"
         ref={filterRef}
       >
         <div className="relative">
           <button
             onClick={() => handleToggleDropDown("city")}
-            className="cursor-pointer w-30 rounded-md bg-red-900 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-pink-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"
+            className="cursor-pointer w-32 ml-4 rounded-md bg-red-900 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-pink-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"
           >
             {filters.city ? filters.city : "City"}
           </button>
-          <div className="absolute left-0 top-full mt-2 w-30 rounded-md shadow-lg z-50">
+          <div className="absolute left-0 top-full mt-2 w-32 rounded-md shadow-lg z-50">
             {isOpen.city &&
               cityOptions.map((city) => (
                 <label
@@ -95,7 +95,7 @@ export default function ShopFilters({ onApplyFilters }) {
         <div className="relative">
           <button
             onClick={() => handleToggleDropDown("neighborhood")}
-            className="cursor-pointer w-32 rounded-md bg-red-900 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-pink-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"
+            className="cursor-pointer w-32 ml-4 rounded-md bg-red-900 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-pink-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"
           >
             {filters.neighborhood ? filters.neighborhood : "Neighborhood"}
           </button>
@@ -119,7 +119,7 @@ export default function ShopFilters({ onApplyFilters }) {
         <div className="relative">
           <button
             onClick={() => handleToggleDropDown("tcgSet")}
-            className="cursor-pointer w-32 rounded-md bg-red-900 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-pink-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"
+            className="cursor-pointer w-32 ml-4 rounded-md bg-red-900 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-pink-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"
           >
             {filters.tcgSet ? filters.tcgSet : "TCG Set"}
           </button>
@@ -141,7 +141,7 @@ export default function ShopFilters({ onApplyFilters }) {
         </div>
         <button
           onClick={() => onApplyFilters(filters)}
-          className="cursor-pointer w-32 rounded-md bg-yellow-500 px-3 py-1.5 text-sm font-semibold text-red-900 shadow-sm hover:bg-yellow-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500"
+          className="cursor-pointer w-32 ml-4 rounded-md bg-yellow-500 px-3 py-1.5 text-sm font-semibold text-red-900 shadow-sm hover:bg-yellow-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500"
         >
           Set Filters
         </button>
@@ -149,7 +149,7 @@ export default function ShopFilters({ onApplyFilters }) {
           onClick={() =>
             onApplyFilters({ city: "", neighborhood: "", tcgSet: "" })
           }
-          className="cursor-pointer w-32 rounded-md bg-gray-500 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-500"
+          className="cursor-pointer w-32 ml-4 rounded-md bg-gray-500 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-500"
         >
           Clear Filters
         </button>
