@@ -65,7 +65,7 @@ export default function ShopFilters({ onApplyFilters }) {
   return (
     <>
       <div
-        className="flex flex-col md:flex-row max-w-2xl mx-auto gap-2 ml-2"
+        className="flex flex-col md:flex-row justify-center w-full mx-auto gap-2 ml-2"
         ref={filterRef}
       >
         <div className="relative">
@@ -73,9 +73,9 @@ export default function ShopFilters({ onApplyFilters }) {
             onClick={() => handleToggleDropDown("city")}
             className="cursor-pointer w-32 ml-4 rounded-md bg-red-900 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-pink-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"
           >
-            {filters.city ? filters.city : "City"}
+            {filters.city !== "" ? filters.city : "City"}
           </button>
-          <div className="absolute left-0 top-full mt-2 w-32 rounded-md shadow-lg z-50">
+          <div className="absolute left-0 top-full ml-4 mt-2 w-32 rounded-md shadow-lg z-50">
             {isOpen.city &&
               cityOptions.map((city) => (
                 <label
@@ -99,7 +99,7 @@ export default function ShopFilters({ onApplyFilters }) {
           >
             {filters.neighborhood ? filters.neighborhood : "Neighborhood"}
           </button>
-          <div className="absolute left-0 top-full mt-2 w-30 rounded-md shadow-lg z-50">
+          <div className="absolute left-0 top-full mt-2 ml-4 w-30 rounded-md shadow-lg z-50">
             {isOpen.neighborhood &&
               neighborhoodOptions.map((neighborhood) => (
                 <label
@@ -123,7 +123,7 @@ export default function ShopFilters({ onApplyFilters }) {
           >
             {filters.tcgSet ? filters.tcgSet : "TCG Set"}
           </button>
-          <div className="absolute left-0 top-full mt-1 ml-1 w-30 rounded-md shadow-lg z-50">
+          <div className="absolute left-0 top-full mt-1 ml-5 w-30 rounded-md shadow-lg z-50">
             {isOpen.tcgSet &&
               tcgSetOptions.map((tcgSet) => (
                 <label
@@ -143,12 +143,13 @@ export default function ShopFilters({ onApplyFilters }) {
           onClick={() => onApplyFilters(filters)}
           className="cursor-pointer w-32 ml-4 rounded-md bg-yellow-500 px-3 py-1.5 text-sm font-semibold text-red-900 shadow-sm hover:bg-yellow-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500"
         >
-          Set Filters
+          Filter
         </button>
         <button
-          onClick={() =>
-            onApplyFilters({ city: "", neighborhood: "", tcgSet: "" })
-          }
+          onClick={() => {
+            (onApplyFilters({ city: "", neighborhood: "", tcgSet: "" }),
+              setFilters({ city: "", neighborhood: "", tcgSet: "" }));
+          }}
           className="cursor-pointer w-32 ml-4 rounded-md bg-gray-500 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-500"
         >
           Clear Filters
