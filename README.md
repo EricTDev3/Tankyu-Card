@@ -2,10 +2,6 @@
 
 A full-stack web app for trading card hobbyists. Trading card enthusiasts can maintain a card shop itinerary and a shopping list of cards that they are looking to purchase on their trip to Japan.
 
-## Live Demo
-
-![Visit](https://tankyu-card.vercel.app/)
-
 ## Screenshots
 
 ### Home Page
