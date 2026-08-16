@@ -4,7 +4,7 @@ A full-stack web app for trading card hobbyists. Trading card enthusiasts can ma
 
 ## Live Demo
 
-![Visit](https://tankyu-card.vercel.app/)
+https://tankyu-card.vercel.app/
 
 ## Screenshots
 
