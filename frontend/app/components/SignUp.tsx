@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import axios from "axios";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -31,7 +32,11 @@ const schema = yup
   })
   .required();
 
+type SignUpType = yup.InferType<typeof schema>;
+
 export default function SignUp() {
+  const [error, setError] = useState("");
+
   const {
     register,
     handleSubmit,
@@ -45,15 +50,24 @@ export default function SignUp() {
 
   const router = useRouter();
 
-  const handleSignupSubmit = async (data) => {
+  const handleSignupSubmit = async (data: SignUpType) => {
+    setError("");
+
     try {
-      const newUser = await axios.post("/api/auth/signUp", {
+      await axios.post("/api/auth/signUp", {
         email: data.email,
         password: data.password,
       });
       router.push("/login");
     } catch (error) {
-      console.error(error);
+      if (axios.isAxiosError(error)) {
+        setError(
+          error.response?.data.message ??
+            "Something went wrong. Please try again.",
+        );
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
     }
   };
 
@@ -100,6 +114,14 @@ export default function SignUp() {
                 className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
               />
             </div>
+            {errors.email && (
+              <p className="mt-1 text-sm text-red-600">
+                {errors.email.message}
+              </p>
+            )}
+            {error && (
+              <div className="mt-2 p-3 text-sm text-red-700">{error}</div>
+            )}
           </div>
 
           <div>
@@ -144,6 +166,11 @@ export default function SignUp() {
                 className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
               />
             </div>
+            {errors.password && (
+              <p className="mt-1 text-sm text-red-600">
+                {errors.password.message}
+              </p>
+            )}
             {watchConfirmPassword && watchConfirmPassword !== watchPassword ? (
               <h4 className="text-red-500">Passwords do not match</h4>
             ) : null}
