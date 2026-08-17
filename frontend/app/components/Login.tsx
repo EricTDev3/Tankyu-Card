@@ -24,6 +24,8 @@ const schema = yup
   })
   .required();
 
+type LoginType = yup.InferType<typeof schema>;
+
 export default function Login() {
   const [error, setError] = useState("");
   const {
@@ -36,7 +38,7 @@ export default function Login() {
 
   const router = useRouter();
 
-  const handleLoginSubmit = async (data) => {
+  const handleLoginSubmit = async (data: LoginType) => {
     setError("");
 
     try {
@@ -51,15 +53,11 @@ export default function Login() {
 
       router.push("/allShops");
     } catch (error) {
-      // if (error.response) {
-      //   setError(error.response.data.message);
-      // } else {
-      //   setError("Something went wrong. Please try again.");
-      // }  console.log("FULL ERROR:", error);
-      console.log("SERVER MESSAGE:", error.response?.data);
-
-      if (error.response) {
-        setError(error.response.data.message);
+      if (axios.isAxiosError(error)) {
+        setError(
+          error.response?.data.message ??
+            "Something went wrong. Please try again.",
+        );
       } else {
         setError("Something went wrong. Please try again.");
       }
