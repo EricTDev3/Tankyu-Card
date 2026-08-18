@@ -17,9 +17,16 @@ import {
   XCircleIcon,
 } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
+import { Dispatch, SetStateAction } from "react";
 import axios from "axios";
 
-export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
+export default function Sidebar({
+  isSidebarOpen,
+  setIsSidebarOpen,
+}: {
+  isSidebarOpen: boolean;
+  setIsSidebarOpen: Dispatch<SetStateAction<boolean>>;
+}) {
   const router = useRouter();
 
   const handleLogout = async () => {
