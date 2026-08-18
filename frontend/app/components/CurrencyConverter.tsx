@@ -1,16 +1,23 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import axios from "axios";
 
+interface ExchangeRate {
+  date: string;
+  base: string;
+  quote: string;
+  rate: number;
+}
+
 export default function CurrencyConverter() {
-  const [rate, setRate] = useState(null);
+  const [rate, setRate] = useState<number | null>(null);
   const [yen, setYen] = useState("");
   const [usd, setUsd] = useState("");
 
   useEffect(() => {
     const fetchRate = async () => {
       try {
-        const data = await axios.get(
+        const data = await axios.get<ExchangeRate[]>(
           "https://api.frankfurter.dev/v2/rates?base=USD&quotes=USD,JPY",
         );
         setRate(data.data[0].rate);
@@ -22,23 +29,23 @@ export default function CurrencyConverter() {
     fetchRate();
   }, []);
 
-  const handleUSDConversion = (e) => {
+  const handleUSDConversion = (e: ChangeEvent<HTMLInputElement>) => {
     setUsd(e.target.value);
 
-    if (e.target.value) {
+    if (e.target.value && typeof rate === "number") {
       const value = Number(e.target.value) * rate;
-      const formatValue = value % 1 !== 0 ? value.toFixed(2) : value;
+      const formatValue = value % 1 !== 0 ? value.toFixed(2) : String(value);
 
       setYen(formatValue);
     }
   };
 
-  const handleYenConversion = (e) => {
+  const handleYenConversion = (e: ChangeEvent<HTMLInputElement>) => {
     setYen(e.target.value);
 
-    if (e.target.value) {
+    if (e.target.value && typeof rate === "number") {
       const value = Number(e.target.value) / rate;
-      const formatValue = value % 1 !== 0 ? value.toFixed(2) : value;
+      const formatValue = value % 1 !== 0 ? value.toFixed(2) : String(value);
       setUsd(formatValue);
     }
   };
