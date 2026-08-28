@@ -28,9 +28,9 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
   };
 
   return (
-    <div className="bg-[url('/images/sidebar.png')] bg-cover bg-center bg-no-repeat h-full">
+    <div className="h-full min-h-screen bg-[url('/images/sidebar.png')] bg-[length:100%_100%] bg-no-repeat">
       <Card
-        className={`${isSidebarOpen ? "block" : "hidden"} md:block fixed top-0 left-0 bottom-0 z-50 md:sticky md:top-0 md:z-auto h-screen w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 bg-[url('/images/sidebar.png')] bg-cover bg-center bg-no-repeat`}
+        className={`${isSidebarOpen ? "block" : "hidden"} md:block fixed top-0 left-0 bottom-0 z-50 h-screen w-full max-w-[20rem] rounded-none p-4 shadow-xl shadow-blue-gray-900/5 bg-transparent bg-[url('/images/sidebar.png')] bg-[length:100%_100%] bg-no-repeat md:static md:h-full md:min-h-screen md:z-auto`}
       >
         <div className="mb-2 p-4">
           <XCircleIcon
