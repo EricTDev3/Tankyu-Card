@@ -1,5 +1,6 @@
 import pool from "../db/db.js";
 import dotenv from "dotenv";
+import axios from "axios";
 
 dotenv.config();
 
@@ -31,6 +32,60 @@ export const getCards = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ error: "Failed to get card list" });
   }
+};
+
+export const getCardInfo = async (req, res) => {
+  const { q } = req.query;
+
+  try {
+    if (!q) {
+      return res.status(400).json({ error: "No query entered" });
+    }
+
+    const result = await axios.get(
+      `https://api.cardsight.ai/v1/catalog/search?q=${q}`,
+      {
+        headers: {
+          "X-API-Key": process.env.TCG_API,
+        },
+      },
+    );
+
+    const filteredResults = result.data.results
+      .filter((card) => card.type === "card")
+      .sort((a, b) => b.relevance - a.relevance)
+      .slice(0, 5);
+
+    const imagePromises = filteredResults.map((card) => {
+      return getImageById(card.id);
+    });
+
+    const images = await Promise.allSettled(imagePromises);
+
+    const mergedResults = filteredResults.map((card, index) => {
+      if (images[index].status === "fulfilled") {
+        return { ...card, image: images[index].value };
+      } else {
+        return { ...card, image: null };
+      }
+    });
+
+    return res.status(200).json(mergedResults);
+  } catch (error) {
+    return res.status(500).json({ error: "Failed to get card info" });
+  }
+};
+
+const getImageById = async (id) => {
+  const result = await axios.get(
+    `https://api.cardsight.ai/v1/images/cards/${id}?format=json`,
+    {
+      headers: {
+        "X-API-Key": process.env.TCG_API,
+      },
+    },
+  );
+  return result.data;
 };
 
 export const deleteCard = async (req, res) => {
