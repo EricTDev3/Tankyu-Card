@@ -51,8 +51,8 @@ export default function ShoppingList() {
   };
 
   return (
-    <div className="flex h-screen bg-[url('/images/cardShops.png')] bg-cover bg-center bg-no-repeat">
-      <div className="flex flex-col mt-50 md:mt-48 md:ml-30 md:items-center items-start flex-1 min-h-screen overflow-y-auto">
+    <div className="flex min-h-screen min-w-0 w-full bg-[url('/images/cardShops.png')] bg-[length:100%_100%] bg-no-repeat">
+      <div className="flex flex-col mt-50 md:mt-48 md:ml-30 items-start md:items-center flex-1 min-w-0 w-full px-2 md:px-0">
         {editClicked && (
           <CardEditingModal
             formData={formData}
@@ -62,36 +62,54 @@ export default function ShoppingList() {
             getCardsList={getCardsList}
           />
         )}
-        <ShoppingForm getCardsList={getCardsList} />
-        <div className="md:w-3/4 mx-auto mt-4 bg-[url('/images/woodenBoard.png')] bg-cover bg-center bg-no-repeat rounded-lg p-4">
-          <table className="table w-full">
+        <div className="w-full min-w-0 md:inline-flex md:w-auto md:flex-col md:items-stretch">
+          <ShoppingForm getCardsList={getCardsList} />
+          <div className="w-full mt-4 md:w-0 md:min-w-full bg-[url('/images/woodenBoard.png')] bg-cover bg-center bg-no-repeat rounded-lg p-2 md:p-4 overflow-x-auto">
+          <table className="table table-xs md:table-sm w-full table-fixed">
             <thead>
               <tr className="text-white text-center">
-                <th className="pl-4">Name</th>
-                <th>Set</th>
-                <th>Market Price</th>
-                <th className="pr-7">Action</th>
+                <th className="p-1 md:px-3 md:py-2"></th>
+                <th className="p-1 md:px-3 md:py-2 leading-tight">Name</th>
+                <th className="p-1 md:px-3 md:py-2 leading-tight">Set</th>
+                <th className="p-1 md:px-3 md:py-2 leading-tight whitespace-normal">
+                  <span className="md:hidden">Price</span>
+                  <span className="hidden md:inline">Market Price</span>
+                </th>
+                <th className="p-1 md:px-3 md:py-2 leading-tight">Action</th>
               </tr>
             </thead>
             <tbody>
               {cardList.map((card) => (
                 <tr key={card.id} className="text-center">
-                  <td className="text-black font-bold">{card.name}</td>
-                  <td className="text-black font-bold">{card.set}</td>
-                  <td className="text-black font-bold">{card.market_price}</td>
-                  <td>
-                    <div className="flex gap-2 justify-center m-4">
+                  <td className="p-1 md:px-3 md:py-2 text-black font-bold">
+                    <img
+                      src={card.card_image}
+                      alt="card image"
+                      className="w-8 h-11 md:w-14 md:h-20 object-cover mx-auto"
+                    />
+                  </td>
+                  <td className="p-1 md:px-3 md:py-2 text-black font-bold break-words">
+                    {card.name}
+                  </td>
+                  <td className="p-1 md:px-3 md:py-2 text-black font-bold break-words">
+                    {card.set}
+                  </td>
+                  <td className="p-1 md:px-3 md:py-2 text-black font-bold break-words">
+                    {card.market_price}
+                  </td>
+                  <td className="p-1 md:px-3 md:py-2">
+                    <div className="flex gap-1 md:gap-2 justify-center items-center">
                       <IconButton
                         onClick={() => handleEditCard(card)}
-                        className="flex h-8 w-8 items-center justify-center rounded"
+                        className="flex !h-6 !w-6 !min-h-6 !min-w-6 !p-0 md:!h-8 md:!w-8 md:!min-h-8 md:!min-w-8 items-center justify-center rounded"
                       >
-                        <PencilSquareIcon className="h-5 w-5 cursor-pointer bg-blue-500 hover:bg-sky-800 active:border-b-0 active:translate-y-[4px] active:shadow-none transition-all" />
+                        <PencilSquareIcon className="h-4 w-4 md:h-5 md:w-5 cursor-pointer bg-blue-500 hover:bg-sky-800 active:border-b-0 active:translate-y-[4px] active:shadow-none transition-all" />
                       </IconButton>
                       <IconButton
                         onClick={() => handleDeleteCard(card.id)}
-                        className="flex h-8 w-8 items-center justify-center rounded"
+                        className="flex !h-6 !w-6 !min-h-6 !min-w-6 !p-0 md:!h-8 md:!w-8 md:!min-h-8 md:!min-w-8 items-center justify-center rounded"
                       >
-                        <TrashIcon className="h-5 w-5 bg-red-500 hover:bg-red-800 cursor-pointer active:border-b-0 active:translate-y-[4px] active:shadow-none transition-all" />
+                        <TrashIcon className="h-4 w-4 md:h-5 md:w-5 bg-red-500 hover:bg-red-800 cursor-pointer active:border-b-0 active:translate-y-[4px] active:shadow-none transition-all" />
                       </IconButton>
                     </div>
                   </td>
@@ -99,6 +117,7 @@ export default function ShoppingList() {
               ))}
             </tbody>
           </table>
+          </div>
         </div>
       </div>
     </div>
