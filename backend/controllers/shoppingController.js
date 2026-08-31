@@ -5,18 +5,26 @@ import axios from "axios";
 dotenv.config();
 
 export const addCard = async (req, res) => {
-  const { name, set, marketPrice } = req.body;
+  const { name, set, marketPrice, cardId, cardImage } = req.body;
   const userId = req.user.id;
 
   const cardData =
-    "INSERT INTO shopping_list(name, set, market_price, user_id) Values($1, $2, $3, $4) RETURNING *";
+    "INSERT INTO shopping_list(name, set, market_price, user_id, card_id, card_image) Values($1, $2, $3, $4, $5, $6) RETURNING *";
 
   try {
-    const result = await pool.query(cardData, [name, set, marketPrice, userId]);
+    const result = await pool.query(cardData, [
+      name,
+      set,
+      marketPrice,
+      userId,
+      cardId,
+      cardImage,
+    ]);
     return res
       .status(201)
       .json({ success: true, shopping_list: result.rows[0] });
   } catch (error) {
+    console.error(error);
     return res.status(500).json({ error: "Failed to add new card data" });
   }
 };

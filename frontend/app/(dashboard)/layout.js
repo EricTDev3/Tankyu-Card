@@ -15,14 +15,16 @@ export default function DashboardLayout({ children }) {
         />
         <h3 className="font-hiro text-pink-950">Tankyu Card</h3>
       </header>
-      <div className="md:flex">
-        <div className={`${isSidebarOpen ? "block" : "hidden"} md:block`}>
+      <div className="md:flex md:items-stretch min-h-screen">
+        <div
+          className={`${isSidebarOpen ? "block" : "hidden"} md:block md:self-stretch`}
+        >
           <Sidebar
             isSidebarOpen={isSidebarOpen}
             setIsSidebarOpen={setIsSidebarOpen}
           />
         </div>
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 min-h-screen min-w-0">{children}</main>
       </div>
     </>
   );
