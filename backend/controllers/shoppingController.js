@@ -4,6 +4,71 @@ import axios from "axios";
 
 dotenv.config();
 
+const getImageById = async (id) => {
+  const result = await axios.get(
+    `https://api.cardsight.ai/v1/images/cards/${id}?format=json`,
+    {
+      headers: {
+        "X-API-Key": process.env.TCG_API,
+      },
+    },
+  );
+  return result.data;
+};
+
+export const identifyCard = async (req, res) => {
+  const allowedTypes = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+
+  try {
+    if (!req.file || !allowedTypes.includes(req.file.mimetype)) {
+      return res
+        .status(400)
+        .json({ error: "Unsupported or missing image file" });
+    }
+
+    const result = await axios.post(
+      "https://api.cardsight.ai/v1/identify/card",
+      req.file.buffer,
+      {
+        headers: {
+          "X-API-Key": process.env.TCG_API,
+          "Content-Type": req.file.mimetype,
+        },
+      },
+    );
+
+    if (result.data.detections.length !== 0) {
+      const cardData = result.data.detections[0].card;
+      const manufacturer =
+        cardData.manufacturer ||
+        cardData.manufacturerName ||
+        "";
+
+      let image = null;
+      try {
+        const imageResult = await getImageById(cardData.id);
+        image = imageResult?.data ?? null;
+      } catch (imageError) {
+        console.error(imageError);
+      }
+
+      return res.status(200).json({
+        id: cardData.id,
+        name: cardData.name,
+        set: manufacturer,
+        image,
+      });
+    } else {
+      return res
+        .status(400)
+        .json({ error: "No card detected from the provided image." });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Failed to identify card" });
+  }
+};
+
 export const addCard = async (req, res) => {
   const { name, set, marketPrice, cardId, cardImage } = req.body;
   const userId = req.user.id;
@@ -82,18 +147,6 @@ export const getCardInfo = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ error: "Failed to get card info" });
   }
-};
-
-const getImageById = async (id) => {
-  const result = await axios.get(
-    `https://api.cardsight.ai/v1/images/cards/${id}?format=json`,
-    {
-      headers: {
-        "X-API-Key": process.env.TCG_API,
-      },
-    },
-  );
-  return result.data;
 };
 
 export const deleteCard = async (req, res) => {
