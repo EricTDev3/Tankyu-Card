@@ -3,7 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function CardSearch({
-  setValue,
+  fillCardFields,
   setSelectedCardId,
   setSelectedCardImage,
 }) {
@@ -38,7 +38,7 @@ export default function CardSearch({
               handleSearch();
             }
           }}
-          placeholder="card name"
+          placeholder="search cards"
           className="block w-48 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
         />
         <button
@@ -51,25 +51,37 @@ export default function CardSearch({
         </button>
       </div>
 
-      {results.length > 0 &&
-        results.map((card) => (
-          <div
-            key={card.id}
-            onClick={() => {
-              setValue("cardName", card.name);
-              setValue("set", card.segmentName);
-              setSelectedCardId(card.id);
-              setSelectedCardImage(card.image.data);
-              setResults([]);
-            }}
-          >
-            {card.image != null && (
-              <img src={card.image.data} alt={card.name} />
-            )}
-            <p>{card.name}</p>
-            <p>{card.segmentName}</p>
-          </div>
-        ))}
+      {results.length > 0 && (
+        <div className="absolute left-0 top-full z-50 mt-1 max-h-80 w-max max-w-xs overflow-y-auto rounded-md bg-white shadow-lg outline outline-1 outline-gray-600">
+          {results.map((card) => (
+            <div
+              key={card.id}
+              onClick={() => {
+                fillCardFields(
+                  card.name,
+                  card.segmentName || card.setName || card.releaseName || "",
+                );
+                setSelectedCardId(card.id);
+                setSelectedCardImage(card.image?.data ?? null);
+                setResults([]);
+              }}
+              className="flex cursor-pointer items-center gap-2 px-2 py-1.5 hover:bg-gray-100"
+            >
+              {card.image != null && (
+                <img
+                  src={card.image.data}
+                  alt={card.name}
+                  className="h-16 w-12 shrink-0 object-cover rounded"
+                />
+              )}
+              <div>
+                <p className="text-sm font-semibold text-gray-900">{card.name}</p>
+                <p className="text-xs text-gray-600">{card.segmentName}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
