@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ShopCard from "./ShopCard";
+import ItineraryMap from "./ItineraryMap";
 
 export default function MustVisitShops() {
   const [savedShops, setSavedShops] = useState([]);
@@ -45,6 +46,8 @@ export default function MustVisitShops() {
           >
             TCG WAYPOINTS
           </h1>
+
+          <ItineraryMap shops={savedShops} />
 
           {savedShops && savedShops.length > 0 ? (
             <div className="mt-6 grid grid-cols-1 gap-6 p-4 sm:grid-cols-2 lg:grid-cols-3">
