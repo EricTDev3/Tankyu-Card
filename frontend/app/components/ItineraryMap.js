@@ -42,14 +42,7 @@ export default function ItineraryMap({ shops }) {
             latitude={shop.latitude}
             onClick={() => setSelectedShop(shop)}
           >
-            <div
-              style={{ cursor: "pointer", fontSize: "24px" }}
-              onClick={() => {
-                setSelectedShop(shop);
-              }}
-            >
-              📍
-            </div>
+            <div style={{ cursor: "pointer", fontSize: "24px" }}>📍</div>
           </Marker>
         ))}
         {selectedShop && (
