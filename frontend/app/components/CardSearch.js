@@ -75,7 +75,9 @@ export default function CardSearch({
                 />
               )}
               <div>
-                <p className="text-sm font-semibold text-gray-900">{card.name}</p>
+                <p className="text-sm font-semibold text-gray-900">
+                  {card.name}
+                </p>
                 <p className="text-xs text-gray-600">{card.segmentName}</p>
               </div>
             </div>
