@@ -19,12 +19,7 @@ export default function ShoppingForm({ getCardsList }) {
   const [selectedCardId, setSelectedCardId] = useState(null);
   const [selectedCardImage, setSelectedCardImage] = useState(null);
   const [searchMode, setSearchMode] = useState("name");
-  const {
-    register,
-    handleSubmit,
-    getValues,
-    reset,
-  } = useForm({
+  const { register, handleSubmit, getValues, reset } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
       cardName: "",
@@ -38,6 +33,7 @@ export default function ShoppingForm({ getCardsList }) {
       ...getValues(),
       cardName: name ?? "",
       set: setName ?? "",
+      marketPrice: "",
     });
   };
 
@@ -60,6 +56,7 @@ export default function ShoppingForm({ getCardsList }) {
       );
 
       getCardsList();
+      fillCardFields();
     } catch (error) {
       console.error(error);
     }
