@@ -96,7 +96,7 @@ export const generateTripPlan = async (req, res) => {
         **TCG Blink**
         Open 1-9PM Daily
 
-        Start the response with: "Hello adventurer! Based on your itinerary, here is the recommended route for visiting all the shops on your list:"
+        Start the response with: "Hello adventurer! Based on your itinerary, visit each store in the following order:"
 
         Only use data that's provided to generate the response — do not invent or guess details about a shop beyond its name and hours.`;
 
