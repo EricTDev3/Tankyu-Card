@@ -4,6 +4,12 @@ import axios from "axios";
 
 dotenv.config();
 
+const SEGMENT_NAMES = {
+  "3266fff9-dfcb-4e00-80fb-922a8ab023d5": "Pokémon",
+  "3d51f376-8fed-414d-aae8-d733674b04a9": "One Piece",
+  "1a135da9-5254-4eb5-8c06-585bf3ae361d": "Magic: The Gathering",
+};
+
 const getImageById = async (id) => {
   const result = await axios.get(
     `https://api.cardsight.ai/v1/images/cards/${id}?format=json`,
@@ -39,10 +45,7 @@ export const identifyCard = async (req, res) => {
 
     if (result.data.detections.length !== 0) {
       const cardData = result.data.detections[0].card;
-      const manufacturer =
-        cardData.manufacturer ||
-        cardData.manufacturerName ||
-        "";
+      const setName = SEGMENT_NAMES[cardData.segmentId] || "";
 
       let image = null;
       try {
@@ -55,7 +58,7 @@ export const identifyCard = async (req, res) => {
       return res.status(200).json({
         id: cardData.id,
         name: cardData.name,
-        set: manufacturer,
+        set: setName,
         image,
       });
     } else {
